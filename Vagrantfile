@@ -71,6 +71,9 @@ Vagrant.configure("2") do |config|
       #vbox.cpus = "2"
       vbox.cpus = "4"
 
+      # [OPTIONAL] set hidpi
+      vbox.customize ['setextradata', :id, 'GUI/HiDPI/UnscaledOutput', '1']
+
     end
 
     # Execute Provisioning Scripts
@@ -154,8 +157,8 @@ SCRIPT
 $script_network_resolvers = <<-SCRIPT
   echo "--- network_resolvers running... "
   
-  if [[ $(cat /etc/dhcp/dhclient.conf| grep -c supersede) > 0 ]]; then
-    echo "already exists..."
+  if [[ -s /tmp/network_resolvers ]]; then
+    echo "resolvers alreadt added..."
   else
     echo "supersede domain-name-servers 1.1.1.1, 1.0.0.1;" >> /etc/dhcp/dhclient.conf
   fi
@@ -168,8 +171,8 @@ SCRIPT
 #customize to ports your liking... 
 $script_network_ufw = <<-SCRIPT
   echo "--- network_ufw running... "
-  apt-get install ufw -qy
-  apt-get install gufw -qy
+  apt-get install ufw -y
+  apt-get install gufw -y
   ufw allow 22/tcp
   ufw allow 80/tcp
   ufw allow 9021/tcp    
@@ -181,14 +184,14 @@ SCRIPT
 
 $script_packages_extra = <<-SCRIPT
   echo "--- packages_extra running... "
-  apt-get install seclists -qy 
-  apt-get install ftp -qy  
-  apt-get install php-curl -qy 
-  apt-get install python-smb -qy
-  apt-get install mingw-w64 -qy
+  apt-get install seclists -y 
+  apt-get install ftp -y  
+  apt-get install php-curl -y 
+  apt-get install python-smb -y
+  apt-get install mingw-w64 -y
   dpkg --add-architecture i386
   apt-get update
-  apt-get install wine32 -qy
+  apt-get install wine32 -y
   echo "--- packages_extra completed... "
 SCRIPT
 
