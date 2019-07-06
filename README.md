@@ -1,6 +1,8 @@
 # Disposable-Kali                                          
 
-This project contains a vagrant file that spins up my preferred Kali Linux customizations.  I attempted to make most of the scripting modular, so you can comment out steps you don't want.  If find something horribly wrong or want to add new goodies then just issue a pull request.  Hope you find this useful!
+This project contains a vagrant file that spins up my preferred Kali Linux customizations.  I attempted to make most of the scripting modular, so you can comment out steps you don't want.  If you find something horribly wrong or want to add new goodies then create an issue and pull request.  Hope you find this useful!
+
+* [Blog Post](https://blog.stevemcilwa.in/posts/disposable-kali)
 
 ## Prerequisites
 
@@ -30,7 +32,7 @@ Please create an issue describing the changes to be merged.
 
 ## Authors
 
-* **Steve Mcilwain** - *Initial work* - [gulfsteve](https://github.com/gulfsteve)
+* **Steve Mcilwain** - *Initial work* - [gulfsteve](https://github.com/stevemcilwain)
 
 See also the list of [contributors](https://github.com/gulfsteve/Disposable-Kali/graphs/contributors) who participated in this project.
 

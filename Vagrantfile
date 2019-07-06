@@ -1,18 +1,9 @@
-
-#  8888888b.  d8b                                              888      888               888    d8P           888 d8b 
-#  888  "Y88b Y8P                                              888      888               888   d8P            888 Y8P 
-#  888    888                                                  888      888               888  d8P             888     
-#  888    888 888 .d8888b  88888b.   .d88b.  .d8888b   8888b.  88888b.  888  .d88b.       888d88K      8888b.  888 888 
-#  888    888 888 88K      888 "88b d88""88b 88K          "88b 888 "88b 888 d8P  Y8b      8888888b        "88b 888 888 
-#  888    888 888 "Y8888b. 888  888 888  888 "Y8888b. .d888888 888  888 888 88888888      888  Y88b   .d888888 888 888 
-#  888  .d88P 888      X88 888 d88P Y88..88P      X88 888  888 888 d88P 888 Y8b.          888   Y88b  888  888 888 888 
-#  8888888P"  888  88888P' 88888P"   "Y88P"   88888P' "Y888888 88888P"  888  "Y8888       888    Y88b "Y888888 888 888 
-#                          888                                                                                         
-#                          888                                                                                         
-#                          888                                                                                                                           
+# Disposable Kali Linux                                                                                                                       
 #
-# Repo: https://github.com/gulfsteve/Disposable-Kali
-# Version: 0.1.0
+# Repo: https://github.com/stevemcilwain/Disposable-Kali
+# Version: 0.1.1
+#
+############################################################
 
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
@@ -101,10 +92,15 @@ end
 $script_sshd_allow_root_login = <<-SCRIPT
   echo "--- sshd_allow_root_login running... "
 
-  echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
-  systemctl restart sshd
+  if [[ -s /tmp/sshd_allow_root_login ]]; then
+    echo "root login already allowed..."
+  else
+    echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
+    systemctl restart sshd
+    touch /tmp/sshd_allow_root_login 
+    echo "--- sshd_allow_root_login completed"
+  fi
 
-  echo "--- sshd_allow_root_login completed"
 SCRIPT
 
 $script_root_shell_aliases = <<-SCRIPT
@@ -158,12 +154,12 @@ $script_network_resolvers = <<-SCRIPT
   echo "--- network_resolvers running... "
   
   if [[ -s /tmp/network_resolvers ]]; then
-    echo "resolvers alreadt added..."
+    echo "resolvers already added..."
   else
     echo "supersede domain-name-servers 1.1.1.1, 1.0.0.1;" >> /etc/dhcp/dhclient.conf
   fi
   
-  cat /etc/dhcp/dhclient.conf | grep supersede
+  cat /etc/dhcp/dhclient.conf | grep "supersede domain-name-servers"
 
   echo "--- network_resolvers completed. "
 SCRIPT
@@ -175,15 +171,15 @@ $script_network_ufw = <<-SCRIPT
   apt-get install gufw -y
   ufw allow 22/tcp
   ufw allow 80/tcp
-  ufw allow 9021/tcp    
-  ufw allow 9022/tcp
-  echo yes | ufw enable
+  ufw allow 443/tcp    
+  #echo yes | ufw enable
   ufw status verbose
   echo "--- network_ufw completed. "
 SCRIPT
 
 $script_packages_extra = <<-SCRIPT
   echo "--- packages_extra running... "
+  apt-get install rlwrap -y
   apt-get install seclists -y 
   apt-get install ftp -y  
   apt-get install php-curl -y 
@@ -192,6 +188,7 @@ $script_packages_extra = <<-SCRIPT
   dpkg --add-architecture i386
   apt-get update
   apt-get install wine32 -y
+  updatedb
   echo "--- packages_extra completed... "
 SCRIPT
 
@@ -218,5 +215,6 @@ $msg = <<MSG
 ------------------------------------------------------
 Your Kali VM is ready!
 Login with "vagrant ssh" and change the root password.
+Use "ufw enable" to turn on the firewall.
 ------------------------------------------------------
 MSG
