@@ -4,14 +4,17 @@ All notable changes to this project will be documented in this file.
 ## [0.2] - 2019-8-11
 ### Fixed
 - Was incorrectly checking for /tmp file flags with -s, changed to -e to make scripts idempotent
+- Disabled misleading colorization from vagrant with keep_color
 ### Changed
 - Moved scripts into files in the /scripts directory so that they can be used outside of Vagrant, and better seperation for source control
 - Removed timezone setting
+- Remove searchsploit -u, way too slow for this (papers)
 - Made adding swap space configurable
 - Made UFW allow ports configurable
 - Moved almost all customizations to vagrant variables
 ### Added
 - netcat aliases to include rlwrap
+- mingw aliases
 - python web server alias
 - fuzzbunch installer on wine (mostly working, python install is still manual)
 - useful git repos cloned

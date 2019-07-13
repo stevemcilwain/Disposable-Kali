@@ -30,5 +30,3 @@ else
     echo " "
 
 fi
-
-

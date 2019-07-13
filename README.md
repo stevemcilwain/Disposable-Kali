@@ -2,8 +2,7 @@
 
 This project contains a vagrant file that spins up a Kali virtual machine (using Virtual Box) with a configurabe list of customizable modifications such as:
 
-![screenshot](ss.png)
-
+- changing "vagrant ssh" to use root 
 - adding swap space
 - setting BASH aliases
 - adding extra wordlists

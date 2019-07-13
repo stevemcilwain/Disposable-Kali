@@ -9,6 +9,3 @@ apt-get -qq -y install winetricks > /dev/null
 dpkg --add-architecture i386 > /dev/null
 apt-get -qq update > /dev/null
 apt-get -qq -y install wine32 > /dev/null
-
-echo "--- $SCRIPT completed "
-

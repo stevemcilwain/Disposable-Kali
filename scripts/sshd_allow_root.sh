@@ -12,5 +12,3 @@ else
     cat /etc/ssh/sshd_config | grep "PermitRootLogin"
     echo " "
 fi
-
-

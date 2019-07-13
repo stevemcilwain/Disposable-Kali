@@ -25,12 +25,12 @@ BOX_UPDATE = true
 VM_NAME = "kali"
 
 # VM_MEMORY: specify the amount of memory to allocate to the VM
-VM_MEMORY = "8192"
-#VM_MEMORY = "4096"
+#VM_MEMORY = "8192"
+VM_MEMORY = "4096"
 #VM_MEMORY = "2048"
 
 # VM_CPUS: specify the number of CPU cores to allocate to the VM
-VM_CPUS = "4"
+VM_CPUS = "2"
 
 # VM_SHARED_FOLDER_ENABLE: set to false to disable the shared folder between host and guest
 VM_SHARED_FOLDER_ENABLE = true
@@ -44,7 +44,7 @@ VM_SHARED_FOLDER_GUEST_PATH = "/root/shared"
 # SWAP_ADD: if enabled, will add the amount of SWAP_ADD_GB to current swap space
 #           which is usually 2GB for the Kali base box
 SWAP_ADD = true
-SWAP_ADD_GB = 6
+SWAP_ADD_GB = 2
 
 # SHELL_ALIASES: if enabled, will add BASH aliases to .bash_aliases.
 #                Aliases can be customized in /scripts/shell_aliases.sh
@@ -52,11 +52,11 @@ SHELL_ALIASES = true
 
 # UFW_INSTALL: if enabled, will install UFW with an allow rule for the ports
 #              in UFW_ALLOW.  UFW will be left disabled, activate manually.
-UFW_INSTALL = true
+UFW_INSTALL = false
 UFW_ALLOW = "22,80,443,4443,4444/tcp"
 
 # PKGS_UPGRADE: if enabled, will run update & upgrade
-PKGS_UPGRADE = true
+PKGS_UPGRADE = false
 
 # PKGS_MSF_PREP: if enabled, will prep Metasploit with postgresql
 PKGS_MSF_PREP = true
@@ -74,6 +74,8 @@ PKGS_GIT_REPOS = true
 PKGS_WINE = true
 
 # PKGS_FUZZBUNCH: if enabled, will install Fuzzbunch - EXPIRIMENTAL
+#                 this isn't fully working, you need to install Python 2.6
+#                 manually in .winefzb using "winetricks python26"
 PKGS_FUZZBUNCH = false
 
 ############################################################
@@ -112,46 +114,46 @@ Vagrant.configure("2") do |config|
 
     # Execute Provisioning Scripts
       
-    kali.vm.provision "shell", name: "sshd_allow_root.sh", path: "scripts/sshd_allow_root.sh"
+    kali.vm.provision "shell", keep_color: true, name: "sshd_allow_root.sh", path: "scripts/sshd_allow_root.sh"
 
     if SWAP_ADD
-      kali.vm.provision "shell", name: "swap_add.sh", path: "scripts/swap_add.sh", args: SWAP_ADD_GB
+      kali.vm.provision "shell", keep_color: true, name: "swap_add.sh", path: "scripts/swap_add.sh", args: SWAP_ADD_GB
     end
 
     if SHELL_ALIASES
-      kali.vm.provision "shell", name: "shell_aliases.sh", path: "scripts/shell_aliases.sh"
+      kali.vm.provision "shell", keep_color: true, name: "shell_aliases.sh", path: "scripts/shell_aliases.sh"
     end
 
     if PKGS_UPGRADE then
-      kali.vm.provision "shell", name: "pkgs_upgrade.sh", path: "scripts/pkgs_upgrade.sh"
+      kali.vm.provision "shell", keep_color: true, name: "pkgs_upgrade.sh", path: "scripts/pkgs_upgrade.sh"
     end  
 
     if UFW_INSTALL
-      kali.vm.provision "shell", name: "network_ufw.sh", path: "scripts/network_ufw.sh", args: UFW_ALLOW
+      kali.vm.provision "shell", keep_color: true, name: "network_ufw.sh", path: "scripts/network_ufw.sh", args: UFW_ALLOW
     end
 
     if PKGS_MSF_PREP
-      kali.vm.provision "shell", name: "pkgs_msf_prep.sh", path: "scripts/pkgs_msf_prep.sh"
+      kali.vm.provision "shell", keep_color: true, name: "pkgs_msf_prep.sh", path: "scripts/pkgs_msf_prep.sh"
     end   
   
     if PKGS_WORDLISTS
-      kali.vm.provision "shell", name: "pkgs_wordlists.sh", path: "scripts/pkgs_wordlists.sh"
+      kali.vm.provision "shell", keep_color: true, name: "pkgs_wordlists.sh", path: "scripts/pkgs_wordlists.sh"
     end
 
     if PKGS_WINE
-      kali.vm.provision "shell", name: "pkgs_wine.sh", path: "scripts/pkgs_wine.sh"
+      kali.vm.provision "shell", keep_color: true, name: "pkgs_wine.sh", path: "scripts/pkgs_wine.sh"
     end
 
     if PKGS_EXPLOITS
-      kali.vm.provision "shell", name: "pkgs_exploits.sh", path: "scripts/pkgs_exploits.sh"
+      kali.vm.provision "shell", keep_color: true, name: "pkgs_exploits.sh", path: "scripts/pkgs_exploits.sh"
     end
 
     if PKGS_GIT_REPOS
-      kali.vm.provision "shell", name: "pkgs_git_repos.sh", path: "scripts/pkgs_git_repos.sh"
+      kali.vm.provision "shell", keep_color: true, name: "pkgs_git_repos.sh", path: "scripts/pkgs_git_repos.sh"
     end
 
     if PKGS_FUZZBUNCH
-      kali.vm.provision "shell", name: "pkgs_fuzzbunch.sh", path: "scripts/pkgs_fuzzbunch.sh"
+      kali.vm.provision "shell", keep_color: true, name: "pkgs_fuzzbunch.sh", path: "scripts/pkgs_fuzzbunch.sh"
     end
 
     kali.vm.post_up_message = $msg
@@ -166,6 +168,9 @@ $msg = <<MSG
 Disposable Kali Vagrant File v0.2.0
 -------------------------------------------------------------
 Source: https://github.com/stevemcilwain/Disposable-Kali
+
+
 -------------------------------------------------------------
+\n
 
 MSG
