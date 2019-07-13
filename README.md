@@ -1,40 +1,72 @@
 # Disposable-Kali                                          
 
-This project contains a vagrant file that spins up my preferred Kali Linux customizations.  I attempted to make most of the scripting modular, so you can comment out steps you don't want.  If you find something horribly wrong or want to add new goodies then create an issue and pull request.  Hope you find this useful!
+This project contains a vagrant file that spins up a Kali virtual machine (using Virtual Box) with a configurabe list of customizable modifications such as:
 
-* [Blog Post](https://blog.stevemcilwa.in/posts/disposable-kali)
+![screenshot](ss.png)
+
+- adding swap space
+- setting BASH aliases
+- adding extra wordlists
+- installing wine
+- update & dist-upgrade
+- prepping metasploit
+- cloning useful git repos like AutoBlue and AutoRecon
+- installing common exploit dependecies and mingw
+- setting up UFW
 
 ## Prerequisites
 
 You'll need to have the following ready before you can use this:
 
-1. A suitable host operating system, I'm using Ubuntu
-2. Oracle Virtual Box 6 installed and working
-3. Hashicorp Vagrant installed and working (tested with v2.25)
+- [VirtualBox 6](https://www.virtualbox.org/) installed and working
+- [Vagrant 2.x](https://www.vagrantup.com/) installed and working 
 
 ## Installing
 
-Git clone the repo, then navigate to the folder in terminal/cmd and "vagrant up".  After the everything completes you can then use "vagrant ssh" to login to Kali as root.
+- Clone this repo or simple download the [Vagrantfile]() to a directory
+- Navigate to the directory, open Vagrantfile in your favorite editor to review/customize settings
+- From a command shell, start the VM.  The first time this runs will take some time doing provisioning.
 
-## Firewall Notes
+```
+vagrant up
+```
 
-Note that one of the scripts I run installs UFW and enables it.  I open certain ports I use to catch reverse shells.  You may want to add your own, or not enable UFW by default.  There's nothing worse than trying an exploit for an hour only to realize you are blocking your own reverse shell connection!!!!
+- Vagrant will download the base Kali box, configure the VM in virtualbox, run provisioning scripts.  The first time this runs this can take some time but should not require any interaction.
 
-## Built With
+- Login, change the root password and use Kali!
 
-* [VirtualBox](https://www.virtualbox.org/)
-* [Vagrant](https://www.vagrantup.com/)
-* [Kali Linux](https://www.kali.org/)
+```
+vagrant ssh
+```
+
+## Usage
+You can use your VM headless or open the virtualbox gui and attach to the running vm to login with a graphical UI.  X11 forwarding is an option in the Vagrantfile for headless usage, easier if your host is linux.
+
+Common VM lifecycle
+```
+#start vm
+vagrant up
+
+#login
+vagrant ssh
+
+#stop the vm
+vagrant halt
+
+#when you want to start with a clean install
+vagrant destroy
+vagrant up
+```
 
 ## Contributing
 
-Please create an issue describing the changes to be merged.
+Please fork and create an issue describing the changes to be merged.
 
 ## Authors
 
-* **Steve Mcilwain** - *Initial work* - [gulfsteve](https://github.com/stevemcilwain)
+* **Steve Mcilwain** - *Initial work* - [stevemcilwain](https://github.com/stevemcilwain)
 
-See also the list of [contributors](https://github.com/gulfsteve/Disposable-Kali/graphs/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/stevemcilwain/Disposable-Kali/graphs/contributors) who participated in this project.
 
 ## License
 
