@@ -1,6 +1,13 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [0.2.1]
+### Added
+- pkgs_exploits.sh - added more packages for ftp, smb and webdav
+- shell_aliases.sh - added additional aliases
+### Fixed
+- change pkgs_upgrade.sh to not be silent (was killing grub)
+
 ## [0.2] - 2019-8-11
 ### Fixed
 - Was incorrectly checking for /tmp file flags with -s, changed to -e to make scripts idempotent
