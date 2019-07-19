@@ -58,3 +58,11 @@ if [[ -e /opt/nmap-bootstrap-xsl ]]; then
 else
     git clone https://github.com/honze-net/nmap-bootstrap-xsl.git /opt/nmap-bootstrap-xsl
 fi
+
+echo ">>> cloning AutoNSE..."
+
+if [[ -e /opt/AutoNSE ]]; then
+    echo ">>> SKIP: already cloned."
+else
+    git clone https://github.com/m4ll0k/AutoNSE /opt/AutoNSE
+fi

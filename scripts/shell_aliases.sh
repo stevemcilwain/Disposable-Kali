@@ -12,8 +12,12 @@ else
     echo "alias lr='ll -R'" >> /root/.bash_aliases
 
     #python web server
-    echo "alias http='python -m SimpleHTTPServer 80'" >> /root/.bash_aliases
-
+    echo "alias http-server='python -m SimpleHTTPServer 80'" >> /root/.bash_aliases
+    echo "alias ftp-server='python -m pyftpdlib -p 21 -w'" >> /root/.bash_aliases
+    echo "alias tftp-server='service atftpd start'" >> /root/.bash_aliases
+    echo "alias smb-server='impacket-smbserver FILES .'" >> /root/.bash_aliases
+    echo "alias webdav-server='davserver -D ./ -n'" >> /root/.bash_aliases
+    
     #netcat shortcuts (rlwrap!!!)
     echo "alias ncr='rlwrap nc'" >> /root/.bash_aliases
     echo "alias ncrl='rlwrap nc -nlvp'" >> /root/.bash_aliases

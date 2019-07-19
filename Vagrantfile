@@ -1,7 +1,7 @@
 # Disposable Kali Linux                                                                                                                       
 #
 # Repo: https://github.com/stevemcilwain/Disposable-Kali
-# Version: 0.2.0
+# Version: 0.2.1
 #
 ############################################################
 
@@ -26,11 +26,11 @@ VM_NAME = "kali"
 
 # VM_MEMORY: specify the amount of memory to allocate to the VM
 #VM_MEMORY = "8192"
-VM_MEMORY = "4096"
+VM_MEMORY = "8096"
 #VM_MEMORY = "2048"
 
 # VM_CPUS: specify the number of CPU cores to allocate to the VM
-VM_CPUS = "2"
+VM_CPUS = "4"
 
 # VM_SHARED_FOLDER_ENABLE: set to false to disable the shared folder between host and guest
 VM_SHARED_FOLDER_ENABLE = true
@@ -44,7 +44,7 @@ VM_SHARED_FOLDER_GUEST_PATH = "/root/shared"
 # SWAP_ADD: if enabled, will add the amount of SWAP_ADD_GB to current swap space
 #           which is usually 2GB for the Kali base box
 SWAP_ADD = true
-SWAP_ADD_GB = 2
+SWAP_ADD_GB = 8
 
 # SHELL_ALIASES: if enabled, will add BASH aliases to .bash_aliases.
 #                Aliases can be customized in /scripts/shell_aliases.sh
@@ -53,7 +53,7 @@ SHELL_ALIASES = true
 # UFW_INSTALL: if enabled, will install UFW with an allow rule for the ports
 #              in UFW_ALLOW.  UFW will be left disabled, activate manually.
 UFW_INSTALL = false
-UFW_ALLOW = "22,80,443,4443,4444/tcp"
+UFW_ALLOW = "20,21,22,80,443,4443,4444/tcp"
 
 # PKGS_UPGRADE: if enabled, will run update & upgrade
 PKGS_UPGRADE = false
@@ -165,7 +165,7 @@ end
 $msg = <<MSG
 
 -------------------------------------------------------------
-Disposable Kali Vagrant File v0.2.0
+Disposable Kali Vagrant File v0.2.1
 -------------------------------------------------------------
 Source: https://github.com/stevemcilwain/Disposable-Kali
 
