@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [0.3]
+### Changed
+- simplified most of the scripts into one big one for now
+- added more packages, repos and setup file hosting for easy txfr to targets
+
 ## [0.2.1]
 ### Added
 - pkgs_exploits.sh - added more packages for ftp, smb and webdav
