@@ -16,7 +16,7 @@ VAGRANT_COMMAND = ARGV[0]
 ############################################################
 
 # BOX_PATH:  the name or full url of the base box to use
-BOX_PATH = "offensive-security/kali-linux"
+BOX_PATH = "kalilinux/rolling"
 
 # BOX_UPDATE: set to true to check for base box updates 
 BOX_UPDATE = true

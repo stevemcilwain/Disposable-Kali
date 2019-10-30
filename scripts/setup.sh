@@ -29,6 +29,7 @@ apt-get autoremove -y
 
 # Add essential packages
 apt-get install -y ufw gufw rlwrap lftp bettercap fonts-powerline crackmapexec xclip
+apt-get install -y seclists gobuster
 
 # Add packages for cross-compiling and exploits
 
@@ -72,6 +73,8 @@ git clone https://github.com/diego-treitos/linux-smart-enumeration.git /opt/linu
 git clone https://github.com/ThePacketBender/pentest_scripts.git /opt/pentest_scripts
 git clone https://github.com/M4ximuss/Powerless.git /opt/powerless
 git clone https://github.com/andrew-d/static-binaries.git /opt/static-binaries
+git clone https://github.com/AlessandroZ/BeRoot.git /opt/beroot
+
 
 # Download Stuff
 
